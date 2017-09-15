@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tache::class);
     }
+
+    public function crs()
+    {
+        return $this->hasMany(Cr::class);
+    }
 }

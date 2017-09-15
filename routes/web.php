@@ -24,3 +24,6 @@ Route::resource('cr', 'CrController');
 Route::resource('tache', 'TacheController', ['parameters' => [
     'tache' => 'id'
 ]]);
+
+Route::get('/email-generate', 'EmailController@generate');
+Route::post('/email-send', 'EmailController@send')->name('send.email');

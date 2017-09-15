@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tache;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class TacheController extends Controller
 {
@@ -41,7 +41,9 @@ class TacheController extends Controller
      */
     public function store(Request $request)
     {
-        Tache::create(['title' => $request->title, 'completed' => $request->completed, 'user_id' => Auth::user()->id]);
+        $tache = Tache::create(['title' => $request->title, 'completed' => $request->completed, 'user_id' => Auth::user()->id]);
+
+        return $tache;
     }
 
     /**

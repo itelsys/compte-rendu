@@ -22,13 +22,13 @@
         <strong v-text="remaining"></strong> {{pluralize('item', remaining)}} left
       </span>
       <ul class="filters">
-        <li><a href="#" @click="visibility = 'all'" :class="{selected: visibility == 'all'}">All</a></li>
-        <li><a href="#" @click="visibility = 'active'" :class="{selected: visibility == 'active'}">Active</a></li>
-        <li><a href="#" @click="visibility = 'completed'" :class="{selected: visibility == 'completed'}">Completed</a></li>
+        <li><a href="" @click.prevent="visibility = 'all'" :class="{selected: visibility == 'all'}">All</a></li>
+        <li><a href="" @click.prevent="visibility = 'active'" :class="{selected: visibility == 'active'}">Active</a></li>
+        <li><a href="" @click.prevent="visibility = 'completed'" :class="{selected: visibility == 'completed'}">Completed</a></li>
       </ul>
-      <button class="clear-completed" v-show="todos.length > remaining">
+      <a href="/email-generate" class="clear-completed" v-show="todos.length > remaining">
         Générer CR
-      </button>
+      </a>
     </footer>
   </section>
 </template>
@@ -85,7 +85,7 @@
           return
         }
         axios.post('tache', { title: value, completed: false })
-        this.todos.push({ title: value, completed: false })
+        	.then(response => this.todos.push(response.data))
         this.newTodo = ''
       },
 
@@ -166,7 +166,7 @@ input[type="checkbox"] {
 	font-smoothing: antialiased;
 	font-weight: 300;
 	background: #fff;
-	margin: 100px 0 40px 0;
+	margin: 50px 0 40px 0;
 	position: relative;
 }
 
@@ -190,7 +190,7 @@ input[type="checkbox"] {
 
 .todoapp h1 {
 	position: absolute;
-	top: -155px;
+	top: -110px;
 	width: 100%;
 	font-size: 80px;
 	font-weight: 100;
