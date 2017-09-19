@@ -1,6 +1,11 @@
 
 window._ = require('lodash');
 
+// load moment js for date and time humainize 
+
+window.moment = require('moment');
+moment.locale('fr');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

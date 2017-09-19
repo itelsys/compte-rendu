@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCrsTable extends Migration
+class CreateEmailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('crs', function (Blueprint $table) {
+        Schema::create('emails', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('cat_cr_id')->unsigned();
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crs');
+        Schema::dropIfExists('emails');
     }
 }

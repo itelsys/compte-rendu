@@ -32,8 +32,8 @@ class User extends Authenticatable
         return $this->hasMany(Tache::class);
     }
 
-    public function crs()
+    public function emails()
     {
-        return $this->hasMany(Cr::class);
+        return $this->hasMany(Email::class);
     }
 }

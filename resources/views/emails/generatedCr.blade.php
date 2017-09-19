@@ -3,20 +3,41 @@
 @section('main-css')
 <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
+<link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css">
+<link rel="stylesheet" href="assets/vendor/parsleyjs/css/parsley.css">
 @endsection
 
 @section('main-content')
-<div class="section-heading">
-	<h1 class="page-title">Nouveau compte rendu</h1>
-</div>
 <div class="panel-content">
-	<form action="{{ route('send.email') }}" method="post"> 
+	<form action="{{ route('send.email') }}" method="post" id="basic-form"> 
 		{{ csrf_field() }}
 
-		<!-- <div class="form-group">
-			<label>Destinataire</label>
-			<input type="email" class="form-control" required autofocus style="background: white">
-		</div> -->
+		<div class="form-group">
+			<label for="users">Envoyer à :</label>
+			<br/>
+			<select id="users" name="users[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-email">
+				@foreach ($users as $user)
+					<option value="{{ $user->email }}">{{ $user->name }}</option>
+				@endforeach
+			</select>
+			<p id="error-email"></p>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="cc">Cc :</label>
+			<br/>
+			<select id="cc" name="cc[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-cc">
+				@foreach ($users as $user)
+					<option value="{{ $user->email }}">{{ $user->name }}</option>
+				@endforeach
+			</select>
+			<p id="error-cc"></p>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label>Objet</label>
+			<input type="text" name="subject" class="form-control" required>
+		</div>
 		<div class="form-group">
 			<textarea id="markdown-editor" name="content" data-provide="markdown" rows="10"></textarea>
 		</div>
@@ -32,8 +53,20 @@
 <script src="{{ asset('assets/vendor/to-markdown/to-markdown.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.js') }}"></script>
 <script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
+<script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<script src="assets/vendor/parsleyjs/js/parsley.min.js"></script>
 <script>
 	$(function() {
+		// FORM Send email
+		$(function() {
+			// validation needs name of the element
+			$('#users').multiselect();
+			$('#cc').multiselect();
+
+			// initialize after multiselect
+			$('#basic-form').parsley();
+		});
+
 		// markdown editor
 		var initContent = '<p>Bonjour Madame/Monsieur.</p><p>Liste des taches éffectuées :</p> ' +
 			`<p>
@@ -57,5 +90,7 @@
 		<?php } ?>
 
 	});
+
+
 </script>
 @endsection

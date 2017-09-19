@@ -123,7 +123,7 @@
 					<a href="#subPages" class="has-arrow" aria-expanded="false"><i class="lnr lnr-envelope"></i> <span>Messages</span></a>
 					<ul aria-expanded="true">
 						<li class=""><a href="">Boîte de réception</a></li>
-						<li class=""><a href="">Envoyés</a></li>
+						<li class=""><a href="{{ route('showSended.email') }}">Envoyés</a></li>
 					</ul>
 				</li>
 				<li class="">

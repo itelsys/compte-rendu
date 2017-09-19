@@ -8,6 +8,7 @@ use Mail;
 use Config;
 use App\Mail\Report;
 use App\User;
+use App\Email;
 
 class EmailController extends Controller
 {
@@ -20,7 +21,9 @@ class EmailController extends Controller
     {
     	$taches = Auth::user()->taches->where('completed', true);
 
-    	return view('emails.generatedCr', compact('taches'));
+        $users = User::all();
+
+    	return view('emails.generatedCr', compact('taches', 'users'));
     }
 
     public function send(Request $request)
@@ -28,8 +31,18 @@ class EmailController extends Controller
         Config::set('mail.from.address', Auth::user()->email);
         Config::set('mail.from.name', Auth::user()->name);
 
-    	Mail::to(User::first())->send(new Report($request->content));
+        if ($request->cc == null)
+        	Mail::to($request->users)->send(new Report($request->content, $request->subject));
+        else
+            Mail::to($request->users)->cc($request->cc)->send(new Report($request->content, $request->subject));
+
+        Auth::user()->emails()->create(['content' => $request->content]);
 
     	return redirect()->back()->with('email-sended', 'Message envoyé');
+    }
+
+    public function showSended()
+    {
+        return view('sended', ['emails' => Auth::user()->emails()->latest()->get()]);
     }
 }

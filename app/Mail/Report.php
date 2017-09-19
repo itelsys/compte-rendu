@@ -6,21 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Auth;
 
 class Report extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $taches;
+    public $content;
+    public $subject;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($taches)
+    public function __construct($content, $subject)
     {
-        $this->taches = $taches;
+        $this->content = $content;
+        $this->subject = $subject;
     }
 
     /**
@@ -30,6 +33,6 @@ class Report extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.report');
+        return $this->subject($this->subject)->markdown('emails.report');
     }
 }

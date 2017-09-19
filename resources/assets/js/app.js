@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('todo', require('./components/Todo.vue'));
+Vue.component('email-list', require('./components/Email-list.vue'));
 
 const app = new Vue({
     el: '#app'

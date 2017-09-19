@@ -20,10 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'UserController');
-Route::resource('cr', 'CrController');
 Route::resource('tache', 'TacheController', ['parameters' => [
     'tache' => 'id'
 ]]);
 
 Route::get('/email-generate', 'EmailController@generate');
 Route::post('/email-send', 'EmailController@send')->name('send.email');
+Route::get('/boîte_d_envoi', 'EmailController@showSended')->name('showSended.email');

@@ -4,18 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cr extends Model
+class Email extends Model
 {
-    protected $fillable = ['user_id', 'cat_cr_id'];
+    protected $fillable = ['user_id', 'content'];
 
     public function user()
     {
     	return $this->belongsTo(User::class);
-    }
-
-    public function catCr()
-    {
-    	return $this->belongsTo(CatCr::class);
     }
 
     public function taches()

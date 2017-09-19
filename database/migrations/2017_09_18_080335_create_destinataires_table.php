@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatCrsTable extends Migration
+class CreateDestinatairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateCatCrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cat_crs', function (Blueprint $table) {
+        Schema::create('destinataires', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('email');
+            $table->integer('cr_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateCatCrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_crs');
+        Schema::dropIfExists('destinataires');
     }
 }
