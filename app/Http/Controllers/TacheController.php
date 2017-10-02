@@ -16,21 +16,12 @@ class TacheController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  date  $date
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($date)
     {
-        return view('tache', ['taches' => Auth::user()->taches]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Auth::user()->taches()->whereDate('date', $date)->get();
     }
 
     /**
@@ -41,31 +32,9 @@ class TacheController extends Controller
      */
     public function store(Request $request)
     {
-        $tache = Tache::create(['title' => $request->title, 'completed' => $request->completed, 'user_id' => Auth::user()->id]);
+        $tache = Tache::create(['title' => $request->title, 'date' => $request->date, 'completed' => $request->completed, 'user_id' => Auth::user()->id]);
 
         return $tache;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tache  $tache
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tache $tache)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tache  $tache
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tache $tache)
-    {
-        //
     }
 
     /**
@@ -84,6 +53,28 @@ class TacheController extends Controller
         else
             $tache->title = $request->title;
         $tache->save();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  boolean  $value
+     * @return \Illuminate\Http\Response
+     */
+    public function allDone(Request $request, $value)
+    {
+        if ($value === 'true') {
+            $tmp = true;
+        }
+        else
+            $tmp = false;
+
+        foreach ($request->request as $tache) {
+            $tache = Tache::findOrFail($tache['id']);
+            $tache->completed = $tmp;
+            $tache->save();
+        }
     }
 
     /**

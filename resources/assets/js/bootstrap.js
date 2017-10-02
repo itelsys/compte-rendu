@@ -1,7 +1,7 @@
 
 window._ = require('lodash');
 
-// load moment js for date and time humainize 
+// load moment js for date and time humainize
 
 window.moment = require('moment');
 moment.locale('fr');

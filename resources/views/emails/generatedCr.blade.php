@@ -2,7 +2,6 @@
 
 @section('main-css')
 <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.min.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
 <link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css">
 <link rel="stylesheet" href="assets/vendor/parsleyjs/css/parsley.css">
 @endsection
@@ -35,7 +34,7 @@
 		</div>
 		<hr>
 		<div class="form-group">
-			<label>Objet</label>
+			<label>Objet :</label>
 			<input type="text" name="subject" class="form-control" required>
 		</div>
 		<div class="form-group">
@@ -52,7 +51,6 @@
 <script src="{{ asset('assets/vendor/markdown/markdown.js') }}"></script>
 <script src="{{ asset('assets/vendor/to-markdown/to-markdown.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap-markdown/bootstrap-markdown.js') }}"></script>
-<script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
 <script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
 <script src="assets/vendor/parsleyjs/js/parsley.min.js"></script>
 <script>
@@ -83,10 +81,15 @@
 		
 
 		<?php if (Session::has('email-sended')) { ?>
+			toastr.options.closeButton = true;
+			toastr.options.positionClass = 'toast-top-center';
+			toastr['success']('<?php echo Session::get('email-sended') ?>');
+		<?php } ?>
 
-		toastr.options.closeButton = true;
-		toastr.options.positionClass = 'toast-top-center';
-		toastr['success']('<?php echo Session::get('email-sended') ?>');
+		<?php if (Session::has('email-not-sended')) { ?>
+			toastr.options.closeButton = true;
+			toastr.options.positionClass = 'toast-top-center';
+			toastr['error']('<?php echo Session::get('email-not-sended') ?>');
 		<?php } ?>
 
 	});

@@ -3,6 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('assets/vendor/linearicons/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/metisMenu/metisMenu.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/vendor/toastr/toastr.min.css') }}">
 @yield('main-css')
 @endsection
 
@@ -15,7 +16,7 @@
 		</div>
 		<!-- logo -->
 		<div class="navbar-brand">
-			<a href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+			<h2>{{ config('app.name', 'Laravel') }}</h2>
 		</div>
 		<!-- end logo -->
 		<div class="navbar-right">
@@ -30,39 +31,9 @@
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-							<i class="lnr lnr-alarm"></i>
-							<span class="notification-dot"></span>
-						</a>
-						<ul class="dropdown-menu notifications">
-							<li class="header"><strong>You have 7 new notifications</strong></li>
-							<li>
-								<a href="#">
-									<div class="media">
-										<div class="media-left">
-											<i class="fa fa-fw fa-flag-checkered text-muted"></i>
-										</div>
-										<div class="media-body">
-											<p class="text">Your campaign <strong>Holiday Sale</strong> is starting to engage potential customers.</p>
-											<span class="timestamp">24 minutes ago</span>
-										</div>
-									</div>
-								</a>
-							</li>
-							
-							<li class="footer"><a href="#" class="more">See all notifications</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
 							<i class="lnr lnr-question-circle"></i>
 						</a>
 						<ul class="dropdown-menu user-menu">
-							<li>
-								<form class="search-form help-search-form">
-									<input value="" class="form-control" placeholder="How can we help?" type="text">
-									<button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-								</form>
-							</li>
 							<li class="menu-heading">HOW-TO</li>
 							<li><a href="#">Setting up Campaign</a></li>
 							<li><a href="#">Understanding Website Analytics</a></li>
@@ -100,9 +71,7 @@
 			<div class="dropdown">
 				<a href="#" class="dropdown-toggle user-name" data-toggle="dropdown">Salut, <strong>{{Auth::user()->name}}</strong> <i class="fa fa-caret-down"></i></a>
 				<ul class="dropdown-menu dropdown-menu-right account">
-					<li><a href="#">My Profile</a></li>
-					<li><a href="#">Messages</a></li>
-					<li><a href="#">Settings</a></li>
+					<li><a href="#">Mon Profile</a></li>
 					<li class="divider"></li>
 					<li><a href="{{ route('logout') }}"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -117,22 +86,8 @@
 		</div>
 		<nav id="left-sidebar-nav" class="sidebar-nav">
 			<ul id="main-menu" class="metismenu">
-				<li class=""><a href=""><i class="lnr lnr-home"></i> <span>Tableau de bord</span></a></li>
-				<li class="active"><a href="{{ route('tache.index') }}"><i class="lnr lnr-magic-wand"></i> <span>Taches</span></a></li>
-				<li class="">
-					<a href="#subPages" class="has-arrow" aria-expanded="false"><i class="lnr lnr-envelope"></i> <span>Messages</span></a>
-					<ul aria-expanded="true">
-						<li class=""><a href="">Boîte de réception</a></li>
-						<li class=""><a href="{{ route('showSended.email') }}">Envoyés</a></li>
-					</ul>
-				</li>
-				<li class="">
-					<a href="#forms" class="has-arrow" aria-expanded="false"><i class="lnr lnr-users"></i> <span>Membres</span></a>
-					<ul aria-expanded="true">
-						<li class=""><a href="">Nouveau membre</a></li>
-						<li class=""><a href="">Liste des membres</a></li>
-					</ul>
-				</li>
+				<li class=""><a href="#"><i class="lnr lnr-home"></i> <span>Tableau de bord</span></a></li>
+				<li class="active"><a href="{{ route('home') }}"><i class="lnr lnr-magic-wand"></i> <span>Lite des taches</span></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -151,6 +106,7 @@
 <!-- Javascript -->
 <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/toastr/toastr.js') }}"></script>
 <script src="{{ asset('assets/vendor/metisMenu/metisMenu.js') }}"></script>
 <script src="{{ asset('assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 @yield('main-js')

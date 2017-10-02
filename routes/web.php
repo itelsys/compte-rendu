@@ -11,19 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 Auth::routes();
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('user', 'UserController');
-Route::resource('tache', 'TacheController', ['parameters' => [
-    'tache' => 'id'
-]]);
+
+Route::get('/taches/{date}', 'TacheController@index');
+Route::post('/taches', 'TacheController@store');
+Route::delete('/taches/{id}', 'TacheController@destroy');
+Route::put('/taches/{id}', 'TacheController@update');
+Route::post('/taches/allDone/{value}', 'TacheController@allDone');
 
 Route::get('/email-generate', 'EmailController@generate');
 Route::post('/email-send', 'EmailController@send')->name('send.email');
-Route::get('/boîte_d_envoi', 'EmailController@showSended')->name('showSended.email');

@@ -6,7 +6,7 @@
         <div class="auth-box">
             <div class="content">
                 <div class="header">
-                    <div class="logo text-center"><img src="assets/img/logo.png" alt="DiffDash"></div>
+                    <div class="logo text-center"><h1>TODO</h1></div>
                     <p class="lead">Connectez-vous à votre compte</p>
                 </div>
                 <form class="form-auth-small" method="POST" action="{{ route('login') }}">
@@ -28,16 +28,16 @@
                             <p class="text-danger">{{ $errors->first('password') }}</p>
                         @endif
                     </div>
-                    <div class="form-group clearfix">
+                    <!-- <div class="form-group clearfix">
                         <label class="fancy-checkbox element-left">
                             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                             <span>Se souvenir de moi</span>
                         </label>
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">CONNEXION</button>
-                    <div class="bottom">
+                    <!-- <div class="bottom">
                         <span class="helper-text"><i class="fa fa-lock"></i> <a href="{{ route('password.request') }}">Mot de passe oublié?</a></span>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>

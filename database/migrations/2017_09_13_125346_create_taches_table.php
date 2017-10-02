@@ -16,7 +16,9 @@ class CreateTachesTable extends Migration
         Schema::create('taches', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->date('date');
             $table->boolean('completed');
+            $table->boolean('sended')->default(false);
             $table->integer('user_id')->unsigned();
             $table->integer('cr_id')->unsigned()->nullable();
             $table->timestamps();
